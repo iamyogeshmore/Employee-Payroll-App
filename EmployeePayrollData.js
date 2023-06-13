@@ -1,23 +1,12 @@
-// <!-- UC 1 – Employee Payroll Class with New Attributes. -->
-
 class EmployeePayrollData {
-  constructor(...params) {
-    this.name = params[0];
-    this.profileImage = params[1];
-    this.gender = params[2];
-    this.department = params[3];
-    this.salary = params[4];
-    this.startDate = params[5];
-    this.notes = params[6];
-    this.id = params[7];
+  get id() {
+    return this._id;
   }
 
-  get id() {
-    return this.id;
-  }
   set id(id) {
     this._id = id;
   }
+
   get name() {
     return this._name;
   }
@@ -25,7 +14,7 @@ class EmployeePayrollData {
   set name(name) {
     let nameRegex = RegExp("^[A-Z]{1}[a-z]{3,}$");
     if (nameRegex.test(name)) this._name = name;
-    else throw "**** NAME is Incorrect ****";
+    else throw "Name is Incorrect";
   }
 
   get profileImage() {
@@ -65,7 +54,13 @@ class EmployeePayrollData {
   }
 
   set startDate(startDate) {
-    this._startDate = startDate;
+    let difference = Date.now() - startDate;
+    difference = Math.ceil(difference / (1000 * 60 * 60 * 24));
+    if (difference > 30 || difference < 0) {
+      throw "Start Date is Invalid";
+    } else {
+      this._startDate = startDate;
+    }
   }
 
   get notes() {
@@ -83,7 +78,9 @@ class EmployeePayrollData {
         ? "undefined"
         : this.startDate.toLocaleDateString("en-us", options);
     return (
-      "Name = " +
+      "Id = " +
+      this.id +
+      ", Name = " +
       this.name +
       ", Profile Image = " +
       this.profileImage +
@@ -98,58 +95,5 @@ class EmployeePayrollData {
       ", Notes = " +
       this.notes
     );
-  }
-}
-
-function save() {
-  let employeeName = document.querySelector("#name").value;
-  let profileList = document.querySelectorAll('input[name="profile"]');
-  let employeeProfileImage;
-  for (let image of profileList) {
-    if (image.checked) {
-      employeeProfileImage = image.value;
-      break;
-    }
-  }
-
-  let genderList = document.querySelectorAll('input[name="gender"]');
-  let employeeGender;
-  for (let gender of genderList) {
-    if (gender.checked) {
-      employeeGender = gender.value;
-      break;
-    }
-  }
-
-  let departmentList = document.querySelectorAll(".checkbox:checked");
-  let employeeDepartment = new Array();
-  for (let department of departmentList) {
-    if (department.checked) {
-      employeeDepartment.push(department.value);
-    }
-  }
-
-  let employeeSalary = document.querySelector("#salary").value;
-
-  let day = document.querySelector("#day").value;
-  let month = document.querySelector("#month").value;
-  let year = document.querySelector("#year").value;
-  let employeeStartDate = new Date(year, month, day);
-
-  let employeeNotes = document.querySelector("#notes").value;
-
-  try {
-    let employeePayrollData = new EmployeePayrollData(
-      employeeName,
-      employeeProfileImage,
-      employeeGender,
-      employeeDepartment,
-      employeeSalary,
-      employeeStartDate,
-      employeeNotes
-    );
-    console.log(employeePayrollData.toString());
-  } catch (e) {
-    console.error(e);
   }
 }
