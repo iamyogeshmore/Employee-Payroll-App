@@ -24,6 +24,26 @@ window.addEventListener("DOMContentLoaded", (event) => {
       nameError.textContent = e;
     }
   });
+
+  var date = document.getElementById("day");
+  var month = document.getElementById("month");
+  var year = document.getElementById("year");
+  const dateError = document.querySelector(".date-error");
+  date.addEventListener("input", validateDate);
+  month.addEventListener("input", validateDate);
+  year.addEventListener("input", validateDate);
+
+  function validateDate() {
+    let startDate = Date.parse(
+      year.value + "-" + month.value + "-" + date.value
+    );
+    try {
+      new EmployeePayrollData().startDate = startDate;
+      dateError.textContent = "";
+    } catch (e) {
+      dateError.textContent = e;
+    }
+  }
 });
 
 // <!-- Uc 13 On Save Create Employee Payroll Object. -->
@@ -31,10 +51,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
 const save = () => {
   try {
     let employeePayrollData = createEmployeePayroll();
+    createAndUpdateStorage(employeePayrollData);
   } catch (e) {
     return;
   }
 };
+// <!-- Uc 14 – Saving Employee Payroll to Local Storage. -->
+
 const createEmployeePayroll = () => {
   let employeePayrollData = new EmployeePayrollData();
   try {
@@ -80,3 +103,18 @@ const getInputElementValue = (id) => {
   let value = document.getElementById(id).value;
   return value;
 };
+function createAndUpdateStorage(employeePayrollData) {
+  let employeePayrollList = JSON.parse(
+    localStorage.getItem("EmployeePayrollList")
+  );
+  if (employeePayrollList != undefined) {
+    employeePayrollList.push(employeePayrollData);
+  } else {
+    employeePayrollList = [employeePayrollData];
+  }
+  alert(employeePayrollList.toString());
+  localStorage.setItem(
+    "EmployeePayrollList",
+    JSON.stringify(employeePayrollList)
+  );
+}
