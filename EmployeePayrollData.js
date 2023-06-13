@@ -11,6 +11,10 @@ class EmployeePayrollData {
     this.notes = params[6];
   }
 
+  // <!-- UC 10 -  Perform Validation Employee Payroll Data setter methods :
+  // Name - Name must starts with Cap and has minimum 3 characters
+  // Start Date Must not be future date. As well as should be within 30 days of joining. -->
+
   get name() {
     return this._name;
   }
