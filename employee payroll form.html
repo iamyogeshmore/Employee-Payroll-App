@@ -27,7 +27,7 @@
     <!-- UC 2 - Emp Payroll Form With Header And Name -->
 
     <div class="form-content">
-      <form class="form" action="#" onsubmit="save(event)">
+      <form class="form" action="#" onreset="resetForm()" onsubmit="save()">
         <div class="form-head">Employee Payroll Form</div>
         <div class="row-content">
           <label for="name" class="label text">Name</label>
@@ -76,19 +76,19 @@
           </div>
         </div>
 
-        <div class="row-content"> <!-- Department -->
+        <div class="row-content">     <!-- Department -->
           <label class="label text" for="department">Department</label>
           <div>
-            <input class="checkbox" type="checkbox" id="hr" name="hr" value="HR">
-            <label class="text" for="hr">HR</label>
-            <input class="checkbox" type="checkbox" id="sales" name="sales" value="Sales">
-            <label class="text" for="sales">Sales</label>
-            <input class="checkbox" type="checkbox" id="finance" name="finance" value="Finance">
-            <label class="text" for="finance">Finance</label>
-            <input class="checkbox" type="checkbox" id="engineer" name="engineer" value="Engineer">
-            <label class="text" for="engineer">Engineer</label>
-            <input class="checkbox" type="checkbox" id="others" name="others" value="Others">
-            <label class="text" for="others">Others</label>
+              <input class="checkbox" type="checkbox" id="hr" name="hr" value="HR">
+              <label class="text" for="hr">HR</label>
+              <input class="checkbox" type="checkbox" id="sales" name="sales" value="Sales">
+              <label class="text" for="sales">Sales</label>
+              <input class="checkbox" type="checkbox" id="finance" name="finance" value="Finance">
+              <label class="text" for="finance">Finance</label>
+              <input class="checkbox" type="checkbox" id="engineer" name="engineer" value="Engineer">
+              <label class="text" for="engineer">Engineer</label>
+              <input class="checkbox" type="checkbox" id="others" name="others" value="Others">
+              <label class="text" for="others">Others</label>
           </div>
         </div>
 
